@@ -12,7 +12,7 @@ class Project
   end
 
   def ==(project)
-    self.name().downcase().eql?(project.name().downcase())
+    self.title().downcase().eql?(project.title().downcase())
   end
 
   def self.all
