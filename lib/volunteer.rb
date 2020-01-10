@@ -15,25 +15,25 @@ class Volunteer
     returned_volunteers = DB.exec "SELECT * FROM volunteers;"
     volunteers = []
     returned_volunteers.each do |volunteer|
-      id = volunteer.fetch "id".to_i
+      id = volunteer.fetch("id").to_i
       name = volunteer.fetch "name"
       project_id = volunteer.fetch "project_id"
-      volunteers.push Volunteer.new {:id => id, :name => name, :project_id => project_id}
+      volunteers.push Volunteer.new({:id => id, :name => name, :project_id => project_id})
     end
-    cities
+    volunteers
   end
 
   def save
     result = DB.exec "INSERT INTO volunteers (name, project_id) VALUES ('#{name}', '#{project_id}') RETURNING id;"
-    @id = result.first.fetch "id".to_i
+    @id = result.first.fetch("id").to_i
   end
 
   def self.find(id)
-    volunteer = DB.exec "SELECT * FROM cities WHERE id = #{id};".first
-    id = volunteer.fetch "id".to_i
+    volunteer = DB.exec("SELECT * FROM volunteers WHERE id = #{id};").first
+    id = volunteer.fetch("id").to_i
     name = volunteer.fetch "name"
     project_id = volunteer.fetch "project_id"
-    Volunteer.new {:id => id, :name => name}
+    Volunteer.new({:id => id, :name => name, :project_id => project_id})
   end
-  
+
 end
