@@ -46,3 +46,22 @@ delete '/projects/:id' do
   @projects = Project.all
   erb(:projects)
 end
+
+post '/projects/:id/add_volunteer' do
+  @volunteer = Volunteer.new({:id => nil, :name => params[:name], :project_id => params[:id].to_i})
+  @volunteer.save
+  @project = Project.find(params[:id].to_i)
+  erb(:project)
+end
+
+get '/volunteers/:id' do
+  @volunteer = Volunteer.find(params[:id])
+  erb(:volunteer)
+end
+
+patch '/volunteers/:id' do
+  @volunteer = Volunteer.find(params[:id])
+  @volunteer = @volunteer.update(params[:name])
+  @volunteers = Volunteer.all
+  erb(:volunteers)
+end

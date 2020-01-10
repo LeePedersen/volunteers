@@ -36,4 +36,9 @@ class Volunteer
     Volunteer.new({:id => id, :name => name, :project_id => project_id})
   end
 
+  def update(name)
+    DB.exec("UPDATE volunteers SET name = '#{name}' WHERE id = #{@id};")
+    volunteer = Volunteer.find(@id)
+  end
+
 end
