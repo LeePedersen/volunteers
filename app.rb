@@ -23,19 +23,26 @@ post '/projects' do
   erb(:projects)
 end
 
-get '/project/:id' do
+get '/projects/:id' do
   @project = Project.find(params[:id])
   @volunteers = @project.volunteers
   erb(:project)
 end
 
-patch '/project/:id' do
+patch '/projects/:id' do
   @project = Project.find(params[:id].to_i)
   @project.update({:title => params[:title], :id => nil})
   erb(:project)
 end
 
-get '/project/:id/edit' do
+get '/projects/:id/edit' do
   @project = Project.find(params[:id].to_i)
   erb(:edit_project)
+end
+
+delete '/projects/:id' do
+  @project = Project.find(params[:id])
+  @project.delete
+  @projects = Project.all
+  erb(:projects)
 end

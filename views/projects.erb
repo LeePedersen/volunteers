@@ -3,7 +3,7 @@
 <% if @projects.any? %>
   <ul>
     <% @projects.sort_by(&:title).each do |project| %>
-    <li><a href="/project/<%= project.id %>"><%= project.title %></a></li>
+    <li><a href="/projects/<%= project.id %>"><%= project.title %></a></li>
     <% end %>
   </ul>
   <% else %>
