@@ -23,6 +23,7 @@ class Project
       title = project.fetch("title")
       projects.push(Project.new({:id => id, :title => title}))
     end
+    projects
   end
 
   def save
