@@ -48,7 +48,6 @@ delete '/projects/:id' do
 end
 
 post '/projects/:id/add_volunteer' do
-  binding.pry
   @volunteer = Volunteer.new({:id => nil, :name => params[:name], :project_id => params[:id].to_i})
   @volunteer.save
   @project = Project.find(params[:id].to_i)
@@ -57,12 +56,20 @@ end
 
 get '/volunteers/:id' do
   @volunteer = Volunteer.find(params[:id])
+  @project = Project.find(@volunteer.project_id)
   erb(:volunteer)
 end
 
 patch '/volunteers/:id' do
   @volunteer = Volunteer.find(params[:id])
   @volunteer = @volunteer.update(params[:name])
+  @volunteers = Volunteer.all
+  erb(:volunteers)
+end
+
+delete '/volunteers/:id' do
+  @volunteer = Volunteer.find(params[:id].to_i)
+  @volunteer.delete
   @volunteers = Volunteer.all
   erb(:volunteers)
 end
