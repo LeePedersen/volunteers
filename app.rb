@@ -48,6 +48,7 @@ delete '/projects/:id' do
 end
 
 post '/projects/:id/add_volunteer' do
+  binding.pry
   @volunteer = Volunteer.new({:id => nil, :name => params[:name], :project_id => params[:id].to_i})
   @volunteer.save
   @project = Project.find(params[:id].to_i)
